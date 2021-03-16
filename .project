@@ -3,6 +3,8 @@
 	<name>OCP6Escalade</name>
 	<comment></comment>
 	<projects>
+		<project>P6Escalade</project>
+		<project>Servers</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
