@@ -23,6 +23,7 @@ public class Reservation  implements Serializable {
 	
 	public Reservation() {
 		super();
+		this.status = "en cours";
 	}
 
 	public Reservation(String status) {
