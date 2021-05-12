@@ -1,6 +1,6 @@
 package fr.OCP6Escalade.Services;
 
-import fr.OCP6Escalde.Entites.Contact;
+import fr.OCP6Escalade.Entites.Contact;
 
 public interface IContactMetier {
 	

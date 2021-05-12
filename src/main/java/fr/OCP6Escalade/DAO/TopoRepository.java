@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import fr.OCP6Escalde.Entites.Topo;
+import fr.OCP6Escalade.Entites.Topo;
 
 public interface TopoRepository extends JpaRepository<Topo, Long>{
 

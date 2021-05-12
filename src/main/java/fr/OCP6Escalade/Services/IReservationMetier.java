@@ -2,7 +2,7 @@ package fr.OCP6Escalade.Services;
 
 import java.util.List;
 
-import fr.OCP6Escalde.Entites.Reservation;
+import fr.OCP6Escalade.Entites.Reservation;
 
 public interface IReservationMetier {
 	

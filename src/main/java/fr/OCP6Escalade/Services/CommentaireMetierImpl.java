@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.OCP6Escalade.DAO.CommentaireRepository;
 import fr.OCP6Escalade.DAO.SiteRepository;
 import fr.OCP6Escalade.DAO.UtilisateurRepository;
-import fr.OCP6Escalde.Entites.Commentaire;
-import fr.OCP6Escalde.Entites.Site;
-import fr.OCP6Escalde.Entites.Utilisateur;
+import fr.OCP6Escalade.Entites.Commentaire;
+import fr.OCP6Escalade.Entites.Site;
+import fr.OCP6Escalade.Entites.Utilisateur;
 
+@Service
+@Transactional
 public class CommentaireMetierImpl implements ICommentaireMetier {
 
 	@Autowired

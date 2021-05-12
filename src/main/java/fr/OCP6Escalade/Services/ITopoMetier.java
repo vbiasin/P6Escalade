@@ -2,7 +2,7 @@ package fr.OCP6Escalade.Services;
 
 import java.util.List;
 
-import fr.OCP6Escalde.Entites.Topo;
+import fr.OCP6Escalade.Entites.Topo;
 
 public interface ITopoMetier {
 

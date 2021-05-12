@@ -1,4 +1,4 @@
-package fr.OCP6Escalde.Entites;
+package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.springframework.security.core.userdetails.User;
 
 
 @Entity
@@ -32,6 +34,7 @@ public class Utilisateur implements Serializable {
 	
 	public Utilisateur() {
 		super();
+		this.role="USER";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -39,6 +42,7 @@ public class Utilisateur implements Serializable {
 		super();
 		this.mail = mail;
 		this.motDePasse = motDePasse;
+		this.role="USER";
 	}
 
 	
@@ -65,14 +69,6 @@ public class Utilisateur implements Serializable {
 
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public Collection<Topo> getTopos() {
@@ -106,6 +102,13 @@ public class Utilisateur implements Serializable {
 	public void setContact(Contact contact) {
 		this.contact = contact;
 	}
-		
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 	
 }

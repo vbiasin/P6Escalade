@@ -1,13 +1,13 @@
-package fr.OCP6Escalde.Entites;
+package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -21,9 +21,9 @@ public class Topo  implements Serializable{
 	private String lieu;
 	private String description;
 	private Date dateParrution;
-	private Date dateMiseEnLigne;
 	private boolean estDispo;
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_utilisateur")
 	private Utilisateur proprietaire;
 	@OneToMany(mappedBy="topo", fetch=FetchType.LAZY)
 	private Collection<Reservation> reservations;
@@ -35,14 +35,13 @@ public class Topo  implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Topo(String nom, String auteur, String lieu, String description, Date dateParrution, Date dateMiseEnLigne) {
+	public Topo(String nom, String auteur, String lieu, String description, Date dateParrution) {
 		super();
 		this.nom = nom;
 		this.auteur = auteur;
 		this.lieu = lieu;
 		this.description = description;
-		this.dateParrution = dateParrution;
-		this.dateMiseEnLigne = dateMiseEnLigne;
+		this.estDispo = true;
 	}
 
 	
@@ -93,14 +92,6 @@ public class Topo  implements Serializable{
 
 	public void setDateParrution(Date dateParrution) {
 		this.dateParrution = dateParrution;
-	}
-
-	public Date getDateMiseEnLigne() {
-		return dateMiseEnLigne;
-	}
-
-	public void setDateMiseEnLigne(Date dateMiseEnLigne) {
-		this.dateMiseEnLigne = dateMiseEnLigne;
 	}
 
 	public boolean isEstDispo() {

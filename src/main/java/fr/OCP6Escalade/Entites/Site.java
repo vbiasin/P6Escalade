@@ -1,4 +1,4 @@
-package fr.OCP6Escalde.Entites;
+package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 import java.util.Collection;

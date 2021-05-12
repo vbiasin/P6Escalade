@@ -1,4 +1,4 @@
-package fr.OCP6Escalde.Entites;
+package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -15,8 +16,10 @@ public class Reservation  implements Serializable {
 	private long id;
 	private String status;
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_topo")
 	private Topo topo;
 	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_utilisateur")
 	private Utilisateur demandeur;
 	
 	

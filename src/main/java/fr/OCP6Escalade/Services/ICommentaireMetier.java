@@ -2,7 +2,7 @@ package fr.OCP6Escalade.Services;
 
 import java.util.List;
 
-import fr.OCP6Escalde.Entites.Commentaire;
+import fr.OCP6Escalade.Entites.Commentaire;
 
 public interface ICommentaireMetier {
 

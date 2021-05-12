@@ -1,6 +1,6 @@
 package fr.OCP6Escalade.Services;
 
-import fr.OCP6Escalde.Entites.Site;
+import fr.OCP6Escalade.Entites.Site;
 
 public interface ISiteMetier {
 

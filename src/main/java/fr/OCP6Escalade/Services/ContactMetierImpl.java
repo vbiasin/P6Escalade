@@ -3,12 +3,16 @@ package fr.OCP6Escalade.Services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.OCP6Escalade.DAO.ContactRepository;
 import fr.OCP6Escalade.DAO.UtilisateurRepository;
-import fr.OCP6Escalde.Entites.Contact;
-import fr.OCP6Escalde.Entites.Utilisateur;
+import fr.OCP6Escalade.Entites.Contact;
+import fr.OCP6Escalade.Entites.Utilisateur;
 
+@Service
+@Transactional
 public class ContactMetierImpl implements IContactMetier {
 
 	@Autowired

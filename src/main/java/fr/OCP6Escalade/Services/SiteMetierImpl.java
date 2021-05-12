@@ -3,12 +3,17 @@ package fr.OCP6Escalade.Services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import fr.OCP6Escalade.DAO.SiteRepository;
 import fr.OCP6Escalade.DAO.UtilisateurRepository;
-import fr.OCP6Escalde.Entites.Site;
-import fr.OCP6Escalde.Entites.Utilisateur;
+import fr.OCP6Escalade.Entites.Site;
+import fr.OCP6Escalade.Entites.Utilisateur;
 
+
+@Service
+@Transactional
 public class SiteMetierImpl implements ISiteMetier {
 	
 	@Autowired
@@ -25,10 +30,12 @@ public class SiteMetierImpl implements ISiteMetier {
 	}
 
 	@Override
-	public Site creerSite(long idAuteur, Site site) throws Exception {
+	public Site creerSite(long idAuteur, Site nouveauSite) throws Exception {
 		Optional<Utilisateur> auteur = utilisateurRepository.findById(idAuteur);
 		if(auteur.isEmpty()) throw new Exception("Utilisateur Inconnu !");
-		return siteRepository.save(site);
+		Optional<Site> site = siteRepository.findByTitre(nouveauSite.getTitre());
+		if(!site.isEmpty()) throw new Exception("Un site ayant le même titre existe déjà !");
+		return siteRepository.save(nouveauSite);
 	}
 
 	@Override
