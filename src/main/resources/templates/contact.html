@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8">
+<title>Mon contact</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="card-title">Ajouter un contact</h3>
+						<form th:action="@{/addContact}" method="post">
+							<div>
+								<label>Nom:</label>
+								<input type="text" name="lastName"/>
+							</div>
+							<div>
+								<label>Prénom:</label>
+								<input type="text" name="firstName"/>
+							</div>
+							<div>
+								<label>Adresse:</label>
+								<input type="text" name="address"/>
+							</div>
+							<button type="submit">Enregistrer</button>
+						</form>
+						<div th:if="${exception}" th:text="${exception}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-6" >
+				<div class="card" >
+					<div class="card-body">
+						<h3 class="card-title">Modifier contact</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>ID</th><th>Nom</th><th>Prénom</th><th>Adresse</th>
+							</tr>
+							  <!-- <tr th:each="r1:${listReservations}">
+							  	<td th:text= "${c.id}"></td>
+								<td th:text= "${c.lastName}"></td>
+								<td th:text= "${c.lastName}"></td>
+								<td ><form  th:action="@{/refuseReservation(idReservation=${r1.id}),idTopo=${r1.topo.id}}" method="post"><button type="submit">Refuser</button></form></td>
+							</tr> -->
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

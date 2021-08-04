@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8" />
+<title>Topos</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="card-title">Ajouter un topo</h3>
+						<form th:action="@{/topoNew}" method="post">
+						<div>
+							<label>Titre:</label> 
+							<input type="text" name="title" />
+						</div>
+						<div>
+							<label>Auteur:</label> 
+							<input type="text" name="author" />
+						</div>
+						<div>
+							<label>Lieu:</label> 
+							<input type="text" name="place" />
+						</div>
+						<div>
+							<label>Description:</label> 
+							<input type="text" name="description" />
+						</div>
+						<button type="submit">Enregistrer</button>
+					</form>
+					<div th:if="${exception}" th:text="${exception}"></div>
+				</div>
+			</div>		
+		</div>
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="card-title">Liste des topos</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>ID</th><th>Titre </th><th>Lieu </th><th>Description </th><th>Réserver</th>
+							</tr>
+							  <tr th:each="t1:${listTopos}">
+							  	<td th:text= "${t1.id}"></td>
+								<td th:text= "${t1.title}"></td>
+								<td th:text= "${t1.place}"></td>
+								<td th:text= "${t1.description}"></td>
+								<td ><form th:action="@{/reservations(idTopo=${t1.id})}" method="post"><button type="submit"  >Réserver</button></form></td>
+							</tr>
+						</table>
+						<div class="container">
+							<ul class="nav nav-pills">
+								<li th:each="p,status:${pagesListTopos}">
+									<a th:href="@{/topos(pageList=${status.index})}" th:text="${status.index}"></a>     
+								</li>
+							</ul>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="card-title">Mes topos</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>ID</th><th>Titre </th><th>Lieu </th><th>Description </th><th>Disponibilité</th><th>Rendre Disponible</th><th>Supprimer</th>
+							</tr>
+							  <tr th:each="t2:${myTopos}">
+							  	<td th:text= "${t2.id}"></td>
+								<td th:text= "${t2.title}"></td>
+								<td th:text= "${t2.place}"></td>
+								<td th:text= "${t2.description}"></td>
+								<td th:text= "${t2.isAvailable}"></td>
+								<td><form th:if="${t2.isAvailable==false}" th:action="@{/availableTopo(idTopo=${t2.id})}" method="post"><button type="submit">Disponible</button></form></td>
+								<td ><form  th:action="@{/removeTopo(idTopo=${t2.id})}" method="post"><button type="submit"  >Supprimer</button></form></td>
+							</tr>
+						</table>
+						<div class="container">
+							<ul class="nav nav-pills">
+								<li th:each="p,status:${pagesMyTopos}">
+									<a th:href="@{/topos(pageMy=${status.index})}" th:text="${status.index}"></a>
+								</li>
+							</ul>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

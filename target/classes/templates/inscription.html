@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8"/>
+<title>Inscription</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<form th:action="@{/inscription}" method="post">
+			<div>
+				<label>Mail:</label>
+				<input type="text" name="mail"/>
+			</div>
+			<div>
+				<label>Mot de passe:</label>
+				<input type="password" name="password"/>
+			</div>
+			<button type="submit">OK</button>
+		</form>
+		<div th:if="${exception}" th:text="${exception}">
+			</div>
+				
+	</section>
+</body>
+</html>

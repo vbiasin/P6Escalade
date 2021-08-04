@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+layout:decorate="~{template.html}">
+<head>
+<meta charset="utf-8"/>
+<title>Réservations</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row">
+			<div class="col-6">
+				<div class="card">
+					<div class="card-body">
+						<h3 class="card-title">Mes demandes de réservation émises</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>N° Réservation</th><th>Titre Topo </th><th>Status </th><th>Contact proprietaire</th>
+							</tr>
+							  <tr th:each="r2:${myReservations}">
+							  	<td th:text= "${r2.id}"></td>
+								<td th:text= "${r2.topo.title}"></td>
+								<td th:text= "${r2.status}"></td>
+								<td th:if="${r2.status=='acceptée'}"th:text="${r2.topo.owner.contact.lastName}+' '+${r2.topo.owner.contact.firstName}+' '+${r2.topo.owner.contact.address}+' '+${r2.topo.owner.mail}"></td>
+							</tr>
+						</table>
+						<div class="container">
+							<ul class="nav nav-pills">
+								<li th:each="p,status:${pagesMyReservations}">
+									<a th:href="@{/reservations(pageMy=${status.index})}" th:text="${status.index}" ></a>     
+								</li>
+							</ul>
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class="col-6" >
+				<div class="card" >
+					<div class="card-body">
+						<h3 class="card-title">Demandes de réservation reçues</h3>
+						<table class="table table-striped">
+							<tr>
+								<th>N° Réservation</th><th>Titre Topo </th><th>Accepter </th><th>Refuser</th><th>Contact demandeur</th>
+							</tr>
+							  <tr th:each="r1:${listReservations}">
+							  	<td th:text= "${r1.id}"></td>
+								<td th:text= "${r1.topo.title}"></td>
+								<td ><form th:if="${r1.status=='en cours'}" th:action="@{/acceptReservation(idReservation=${r1.id})}" method="post"><button type="submit">Accepter</button></form></td>
+								<td ><form th:if="${r1.status=='en cours'}" th:action="@{/refuseReservation(idReservation=${r1.id},idTopo=${r1.topo.id})}" method="post"><button type="submit">Refuser</button></form></td>
+								<td th:if="${r1.status=='acceptée'}" th:text="${r1.applicant.contact.lastName}+' '+${r1.applicant.contact.firstName}+' '+${r1.applicant.contact.address}+' '+${r1.applicant.mail}"></td>
+							</tr>
+						</table>
+						<div class="container">
+							<ul class="nav nav-pills">
+								<li th:each="p,status:${pagesListReservations}">
+									<a th:href="@{/reservations(pageList=${status.index})}" th:text="${status.index}" ></a>     
+								</li>
+							</ul>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
