@@ -2,10 +2,12 @@ package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.sql.Date;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,18 +16,18 @@ import javax.persistence.OneToMany;
 @Entity
 public class Topo  implements Serializable{
 	
-	@Id@GeneratedValue
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nom;
-	private String auteur;
-	private String lieu;
+	private String title;
+	private String author;
+	private String place;
 	private String description;
-	private Date dateParrution;
-	private boolean estDispo;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_utilisateur")
-	private Utilisateur proprietaire;
-	@OneToMany(mappedBy="topo", fetch=FetchType.LAZY)
+	private Date onlineDate;
+	private boolean isAvailable;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idUser")
+	private User owner;
+	@OneToMany(mappedBy="topo", fetch=FetchType.EAGER)
 	private Collection<Reservation> reservations;
 	
 	
@@ -35,13 +37,14 @@ public class Topo  implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Topo(String nom, String auteur, String lieu, String description, Date dateParrution) {
+	public Topo(Date onlineDate, String title, String author, String place, String description) {
 		super();
-		this.nom = nom;
-		this.auteur = auteur;
-		this.lieu = lieu;
+		this.title = title;
+		this.author = author;
+		this.place = place;
 		this.description = description;
-		this.estDispo = true;
+		this.isAvailable = true;
+		this.onlineDate = onlineDate;
 	}
 
 	
@@ -54,28 +57,28 @@ public class Topo  implements Serializable{
 		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getAuteur() {
-		return auteur;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAuteur(String auteur) {
-		this.auteur = auteur;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
-	public String getLieu() {
-		return lieu;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setLieu(String lieu) {
-		this.lieu = lieu;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public String getDescription() {
@@ -86,28 +89,28 @@ public class Topo  implements Serializable{
 		this.description = description;
 	}
 
-	public Date getDateParrution() {
-		return dateParrution;
+	public Date getOnlineDate() {
+		return onlineDate;
 	}
 
-	public void setDateParrution(Date dateParrution) {
-		this.dateParrution = dateParrution;
+	public void setOnlineDate(Date onlineDate) {
+		this.onlineDate = onlineDate;
 	}
 
-	public boolean isEstDispo() {
-		return estDispo;
+	public boolean isAvailable() {
+		return isAvailable;
 	}
 
-	public void setEstDispo(boolean estDispo) {
-		this.estDispo = estDispo;
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 
-	public Utilisateur getProprietaire() {
-		return proprietaire;
+	public User getOwner() {
+		return owner;
 	}
 
-	public void setProprietaire(Utilisateur proprietaire) {
-		this.proprietaire = proprietaire;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	public Collection<Reservation> getReservations() {

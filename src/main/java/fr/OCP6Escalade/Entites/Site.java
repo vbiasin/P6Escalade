@@ -6,44 +6,49 @@ import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Site  implements Serializable {
 	
-	@Id@GeneratedValue
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String description;
-	private String lieu;
-	private String pays;
-	private String titre;
+	private String place;
+	private String country;
+	private String title;
 	private String cotation;
 	private boolean tag;
-	private double longueur;
-	private int nbVues;
-	private int nbVoies;
-	private int nbSecteurs;
+	private double length=-1;
+	private int nbViews=0;
+	private int nbPaths=-1;
+	private int nbSectors=-1;
 	@OneToMany(mappedBy ="site",fetch=FetchType.LAZY)
-	private Collection<Commentaire> commentaires;
+	private Collection<Comment> comments;
 	
 	
 	
 	public Site() {
 		super();
+		this.length = 0;
+		this.nbPaths = 0;
+		this.nbSectors = 0;
+		
 	}
 
-	public Site(String description, String lieu, String pays, String titre, String cotation, double longueur,
-			int nbVoies, int nbSecteurs) {
+	public Site(String description, String place, String country, String title, String cotation, double length,
+			int nbPaths, int nbSectors) {
 		super();
 		this.description = description;
-		this.lieu = lieu;
-		this.pays = pays;
-		this.titre = titre;
+		this.place = place;
+		this.country = country;
+		this.title = title;
 		this.cotation = cotation;
-		this.longueur = longueur;
-		this.nbVoies = nbVoies;
-		this.nbSecteurs = nbSecteurs;
+		this.length = length;
+		this.nbPaths = nbPaths;
+		this.nbSectors = nbSectors;
 	}
 
 	
@@ -64,28 +69,28 @@ public class Site  implements Serializable {
 		this.description = description;
 	}
 
-	public String getLieu() {
-		return lieu;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setLieu(String lieu) {
-		this.lieu = lieu;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
-	public String getPays() {
-		return pays;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setPays(String pays) {
-		this.pays = pays;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	public String getTitre() {
-		return titre;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitre(String titre) {
-		this.titre = titre;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getCotation() {
@@ -104,44 +109,44 @@ public class Site  implements Serializable {
 		this.tag = tag;
 	}
 
-	public double getLongueur() {
-		return longueur;
+	public double getLength() {
+		return length;
 	}
 
-	public void setLongueur(double longueur) {
-		this.longueur = longueur;
+	public void setLength(double length) {
+		this.length = length;
 	}
 
-	public int getNbVues() {
-		return nbVues;
+	public int getNbViews() {
+		return nbViews;
 	}
 
-	public void setNbVues(int nbVues) {
-		this.nbVues = nbVues;
+	public void setNbViews(int nbViews) {
+		this.nbViews = nbViews;
 	}
 
-	public int getNbVoies() {
-		return nbVoies;
+	public int getNbPaths() {
+		return nbPaths;
 	}
 
-	public void setNbVoies(int nbVoies) {
-		this.nbVoies = nbVoies;
+	public void setNbPaths(int nbPaths) {
+		this.nbPaths = nbPaths;
 	}
 
-	public int getNbSecteurs() {
-		return nbSecteurs;
+	public int getNbSectors() {
+		return nbSectors;
 	}
 
-	public void setNbSecteurs(int nbSecteurs) {
-		this.nbSecteurs = nbSecteurs;
+	public void setNbSectors(int nbSectors) {
+		this.nbSectors = nbSectors;
 	}
 
-	public Collection<Commentaire> getCommentaires() {
-		return commentaires;
+	public Collection<Comment> getComments() {
+		return comments;
 	}
 
-	public void setCommentaires(Collection<Commentaire> commentaires) {
-		this.commentaires = commentaires;
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
 	}	
 
 }

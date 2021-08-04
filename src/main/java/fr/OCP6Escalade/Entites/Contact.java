@@ -4,19 +4,18 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Contact  implements Serializable {
 	
-	@Id@GeneratedValue
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nom;
-	private String prenom;
-	private String adresse;
-	@OneToOne
-	private Utilisateur utilisateur;
+	private String lastName;
+	private String firstName;
+	private String address;
 	
 	
 	
@@ -24,11 +23,11 @@ public class Contact  implements Serializable {
 		super();
 	}
 	
-	public Contact(String nom, String prenom, String adresse) {
+	public Contact(String lastName, String firstName, String address) {
 		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.address = address;
 	}
 	
 	
@@ -39,23 +38,23 @@ public class Contact  implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getNom() {
-		return nom;
+	public String getLastName() {
+		return lastName;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getPrenom() {
-		return prenom;
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public String getAdresse() {
-		return adresse;
+	public String getAddress() {
+		return address;
 	}
-	public void setAdresse(String adresse) {
-		this.adresse = adresse;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

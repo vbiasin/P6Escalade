@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,15 +13,15 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Reservation  implements Serializable {
 
-	@Id@GeneratedValue
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String status;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_topo")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idTopo")
 	private Topo topo;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_utilisateur")
-	private Utilisateur demandeur;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idUser")
+	private User applicant;
 	
 	
 	
@@ -60,12 +61,12 @@ public class Reservation  implements Serializable {
 		this.topo = topo;
 	}
 
-	public Utilisateur getDemandeur() {
-		return demandeur;
+	public User getApplicant() {
+		return applicant;
 	}
 
-	public void setDemandeur(Utilisateur demandeur) {
-		this.demandeur = demandeur;
+	public void setApplicant(User applicant) {
+		this.applicant = applicant;
 	}
 		
 }

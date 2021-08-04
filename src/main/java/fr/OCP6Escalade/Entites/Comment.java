@@ -6,35 +6,36 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Commentaire  implements Serializable {
+public class Comment  implements Serializable {
 
-	@Id@GeneratedValue
+	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private Date datePublication;
+	private Date publicationDate;
 	private String text;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_utilisateur")
-	private Utilisateur auteur;
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_site")
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idUser")
+	private User author;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idSite")
 	private Site site;
 	
 	
 	
-	public Commentaire() {
+	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Commentaire(Date datePublication, String text) {
+	public Comment(Date publicationDate, String text) {
 		super();
-		this.datePublication = datePublication;
+		this.publicationDate = publicationDate;
 		this.text = text;
 	}
 
@@ -48,12 +49,12 @@ public class Commentaire  implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDatePublication() {
-		return datePublication;
+	public Date getPublicationDate() {
+		return publicationDate;
 	}
 
-	public void setDatePublication(Date datePublication) {
-		this.datePublication = datePublication;
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 	public String getText() {
@@ -64,12 +65,12 @@ public class Commentaire  implements Serializable {
 		this.text = text;
 	}
 
-	public Utilisateur getAuteur() {
-		return auteur;
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setAuteur(Utilisateur auteur) {
-		this.auteur = auteur;
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	public Site getSite() {
