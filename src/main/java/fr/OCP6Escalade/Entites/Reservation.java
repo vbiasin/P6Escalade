@@ -16,10 +16,10 @@ public class Reservation  implements Serializable {
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String status;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idTopo")
 	private Topo topo;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUser")
 	private User applicant;
 	

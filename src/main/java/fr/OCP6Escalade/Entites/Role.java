@@ -2,6 +2,7 @@ package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,12 +12,12 @@ import javax.persistence.ManyToMany;
 
 
 @Entity
-public class Role implements Serializable {
+public class Role implements Serializable{
 	
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String name;
-	@ManyToMany(mappedBy = "role")
+	@ManyToMany(mappedBy = "roles")
 	private Collection<User> user;
 	
 	
@@ -45,7 +46,5 @@ public class Role implements Serializable {
 	public long getId() {
 		return id;
 	}
-	
-	
 
 }

@@ -23,7 +23,7 @@ layout:decorate="~{template.html}">
 		<div>
 				<table class="table table-striped">
 				<tr>
-					<td th:text= "${title}+' '+${nbVues}"> vues</td>
+					<td th:text= "${id}+' '+${title}+' '+${nbVues}+' '+vues"> </td>
 				</tr>
 				<tr>
 					<th>Cotation</th><th>Secteurs</th><th>Chemin</th><th>Longueur</th>
@@ -50,7 +50,7 @@ layout:decorate="~{template.html}">
 					<td th:text= "${c.publicationDate}"></td>
 					<td th:text= "${c.author.contact.lastName}+' '+${c.author.contact.firstName}"></td>
 					<td th:text= "${c.text}"></td>
-				    <td  sec:authorize="hasAuthority('ADMIN')"><form th:action="@{/removeComment(idComment=${c.id})" method="post"><button type="submit"  >Supprimer</button></form></td>
+				    <td  sec:authorize="hasAuthority('ADMIN')"><form th:action="@{/removeComment(idSite=${id},idComment=${c.id})}" method="post"><button type="submit"  >Supprimer</button></form></td>
 				</tr>
 			</table>
 		</div>		

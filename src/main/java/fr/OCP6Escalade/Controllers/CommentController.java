@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +47,7 @@ public class CommentController {
 			model.addAttribute("nbSectors",s.getNbSectors());
 			model.addAttribute("nbPaths",s.getNbPaths());
 			model.addAttribute("length",s.getLength());
-			model.addAttribute("id",s.getId());
+			model.addAttribute("id",idSite);
 	
 			
 			
@@ -64,26 +65,28 @@ public class CommentController {
 	}
 	
 	@PostMapping("/removeComment")
-	public String removeTopo(@RequestParam Long idComment) {
+	public String removeTopo(Model model,@RequestParam long idSite, @RequestParam long idComment) {
+		model.addAttribute("idSite",idSite);
 		try {
 			commentService.removeComment(idComment);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/target";
+		return "redirect:/target?idSite="+idSite;
 	}
 	
 	@PostMapping("/commentNew")
-	public String commentNew(@RequestParam Long idSite,Model model,String comment) {
+	public String commentNew(Model model,String comment,@RequestParam long idSite) {
+		model.addAttribute("idSite",idSite);
 		try {
 			User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			commentService.addComment(userService.getUser(activeUser.getUsername()).getId(), idSite,new Comment(new Date(),comment));
+			commentService.addComment(userService.getUser(activeUser.getUsername()).getId(),idSite,new Comment(new Date(),comment));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/target";
+		return "redirect:/target?idSite="+idSite;
 	}
 	
 }

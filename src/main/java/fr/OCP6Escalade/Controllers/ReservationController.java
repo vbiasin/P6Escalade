@@ -33,6 +33,11 @@ public class ReservationController {
 		User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 		try {
+			
+			if(userService.getUser(activeUser.getUsername()).getContact()==null) {
+				return "contact";
+			}
+			
 			pageListReservations = reservationService.listReservations(userService.getUser(activeUser.getUsername()).getId(),pageList,size);
 			model.addAttribute("listReservations",pageListReservations.getContent()); 
 			int []pagesListReservations = new int[pageListReservations.getTotalPages()];

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Topo  implements Serializable{
 	
@@ -24,10 +25,10 @@ public class Topo  implements Serializable{
 	private String description;
 	private Date onlineDate;
 	private boolean isAvailable;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUser")
 	private User owner;
-	@OneToMany(mappedBy="topo", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="topo",fetch=FetchType.LAZY)
 	private Collection<Reservation> reservations;
 	
 	
