@@ -15,5 +15,10 @@ public class OCP6EscladeController {
 	public String home() {
 		return "home";
 	}
+	
+	@RequestMapping("/administration")
+	public String administration() {
+		return "administration";
+	}
 
 }

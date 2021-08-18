@@ -100,7 +100,7 @@ layout:decorate="~{template.html}">
 						<h3 class="card-title">Liste sites</h3>
 						<table class="table table-striped">
 							<tr>
-								<th>ID</th><th>Titre </th><th>Pays</th><th>Lieu</th><th>Cotation</th><th>Longueur</th><th>nombre de secteurs</th><th>nombre de voies</th><th>Détails</th>
+								<th>ID</th><th>Titre </th><th>Pays</th><th>Lieu</th><th>Cotation</th><th>Longueur</th><th>nombre de secteurs</th><th>nombre de voies</th><th>Détails</th><th>Taguer</th>
 							</tr>
 							<tr th:each="s:${listSites}">
 							  	<td th:text= "${s.id}"></td>
@@ -112,6 +112,7 @@ layout:decorate="~{template.html}">
 								<td th:text= "${s.nbSectors}"></td>
 								<td th:text= "${s.nbPaths}"></td>
 								<td ><form th:action="@{/target(idSite=${s.id})}" target="_blank" method="post"><button type="submit"  >Détails</button></form></td>
+								<td  sec:authorize="hasAuthority('ADMIN')"><form th:action="@{/tag(idSite=${s.id})}" method="post"><button type="submit"  >Taguer</button></form></td>
 							</tr>  
 						</table>
 						

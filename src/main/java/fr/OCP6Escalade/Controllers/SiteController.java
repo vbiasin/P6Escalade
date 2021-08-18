@@ -93,5 +93,16 @@ public class SiteController {
 		}
 		return "sites";
 	}
+	
+	@PostMapping("/tag")
+	public String tag(@RequestParam long idSite) {
+		try {
+			siteService.tagSite(idSite);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "sites";
+	}
 
 }
