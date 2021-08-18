@@ -1,6 +1,7 @@
 package fr.OCP6Escalade.Entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Entity;
@@ -25,18 +26,17 @@ public class User implements Serializable {
 	private long id;
 	private String mail;
 	private String password;
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@ManyToMany()
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(
 	  name = "users_roles", 
 	  joinColumns = @JoinColumn(name = "user_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Collection<Role> role;
-	@OneToMany(mappedBy="owner", fetch=FetchType.LAZY)
+	private Collection<Role> roles;
+	@OneToMany(mappedBy="owner",fetch=FetchType.LAZY)
 	private Collection<Topo> topos;
-	@OneToMany(mappedBy="author", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="author",fetch=FetchType.LAZY)
 	private Collection<Comment> comments;
-	@OneToMany(mappedBy="applicant", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="applicant",fetch=FetchType.LAZY)
 	private Collection<Reservation> reservations;
 	@OneToOne
 	private Contact contact;
@@ -111,12 +111,12 @@ public class User implements Serializable {
 		this.contact = contact;
 	}
 
-	public Collection<Role> getRole() {
-		return role;
+	public  Collection<Role> getRole() {
+		return roles;
 	}
 
-	public void setRole(Collection<Role> role) {
-		this.role = role;
+	public void setRole( Collection<Role> roles) {
+		this.roles = roles;
 	}
 
 	public void setComments(Collection<Comment> comments) {

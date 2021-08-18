@@ -1,5 +1,6 @@
 package fr.OCP6Escalade.Services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -9,7 +10,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.OCP6Escalade.DAO.RoleRepository;
 import fr.OCP6Escalade.DAO.UserRepository;
+import fr.OCP6Escalade.Entites.Role;
 import fr.OCP6Escalade.Entites.User;
 
 @Service
@@ -22,11 +25,20 @@ public class UserServiceImpl implements IUserService{
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	
 	@Override
 	public User register(User visitor) throws Exception {
+		Optional<Role> defaultRole = roleRepository.findByName("USER");
+		if(defaultRole.isEmpty()) throw new Exception("Erreur lors de l'affectation du Role USER");
 		Optional<User> newUser = userRepository.findByMail(visitor.getMail());
 		if(!newUser.isEmpty()) throw new Exception("Un utilisateur avec cette adresse mail existe déjà !");
+		ArrayList<Role> roles = new ArrayList<Role>();
+		roles.add(defaultRole.get());
 		visitor.setPassword(bCryptPasswordEncoder.encode(visitor.getPassword()));
+		visitor.setRole(roles);
 		return userRepository.save(visitor);
 	}
 

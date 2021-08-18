@@ -19,10 +19,10 @@ public class Comment  implements Serializable {
 	private long id;
 	private Date publicationDate;
 	private String text;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUser")
 	private User author;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idSite")
 	private Site site;
 	

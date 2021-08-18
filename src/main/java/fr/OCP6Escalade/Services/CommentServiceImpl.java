@@ -30,7 +30,7 @@ public class CommentServiceImpl implements ICommentService {
 	SiteRepository siteRepository;
 	
 	@Override
-	public Comment addComment(long idSite, long idUser, Comment comment) throws Exception {
+	public Comment addComment(long idUser, long idSite, Comment comment) throws Exception {
 		Optional<Site> site = siteRepository.findById(idSite);
 		Optional<User> author = userRepository.findById(idUser);
 		if(site.isEmpty())throw new Exception("Le site n'existe pas !");

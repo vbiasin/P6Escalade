@@ -35,6 +35,7 @@ public class Site  implements Serializable {
 		this.length = 0;
 		this.nbPaths = 0;
 		this.nbSectors = 0;
+		this.nbViews=0;
 		
 	}
 
@@ -49,6 +50,7 @@ public class Site  implements Serializable {
 		this.length = length;
 		this.nbPaths = nbPaths;
 		this.nbSectors = nbSectors;
+		this.nbViews=0;
 	}
 
 	

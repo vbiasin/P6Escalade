@@ -9,6 +9,9 @@ layout:decorate="~{template.html}">
 </head>
 <body>
 	<section layout:fragment="content">
+	<p>Veuillez renseigner un contact afin de profiter de toutes les fonctionnalités du site Les Amis de l'escalade !</p>
+	<p>Nous déclinons toute responsabilité en cas de saisies d'informations erronées !</p>
+	<!-- <p>Attention de maintenir vos informations à jour !</p> -->
 		<div class="row">
 			<div class="col-6">
 				<div class="card">
@@ -33,7 +36,7 @@ layout:decorate="~{template.html}">
 					</div>
 				</div>
 			</div>
-			<div class="col-6" >
+			<!-- <div class="col-6" >
 				<div class="card" >
 					<div class="card-body">
 						<h3 class="card-title">Modifier contact</h3>
@@ -41,17 +44,17 @@ layout:decorate="~{template.html}">
 							<tr>
 								<th>ID</th><th>Nom</th><th>Prénom</th><th>Adresse</th>
 							</tr>
-							  <!-- <tr th:each="r1:${listReservations}">
-							  	<td th:text= "${c.id}"></td>
-								<td th:text= "${c.lastName}"></td>
-								<td th:text= "${c.lastName}"></td>
-								<td ><form  th:action="@{/refuseReservation(idReservation=${r1.id}),idTopo=${r1.topo.id}}" method="post"><button type="submit">Refuser</button></form></td>
-							</tr> -->
+							<tr>
+							  	<td th:text= "${id}"></td>
+								<td th:text= "${lastName}"></td>
+								<td th:text= "${firstName}"></td>
+								<td ><form  th:action="@{/modifyContact(idContact=${id})}" target="_blank" method="post"><button type="submit">Modifier</button></form></td>
+							</tr>
 						</table>
 
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</section>
 </body>

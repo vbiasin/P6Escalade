@@ -23,7 +23,8 @@ public class ContactController {
 	
 	
 	@RequestMapping("/contact")
-	public String index() {
+	public String index(Model model) {
+		
 		return "contact";
 	}
 	

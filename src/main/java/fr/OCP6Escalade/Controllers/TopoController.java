@@ -3,6 +3,7 @@ package fr.OCP6Escalade.Controllers;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -28,14 +29,16 @@ public class TopoController {
 	@RequestMapping("/topos")
 	public String topos(Model model,@RequestParam(name="pageList",defaultValue="0") int pageList,
 			@RequestParam(name="size",defaultValue="3") int size,@RequestParam(name="pageMy",defaultValue="0") int pageMy) {
-
+		
+	
 		Page<Topo> pageListTopos;
 		Page<Topo> pageMyTopos;
 		User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 		try {
-
-
+			if(userService.getUser(activeUser.getUsername()).getContact()==null) {
+				return "contact";
+			}
+			
 			pageListTopos = topoService.listTopos(pageList,size);
 			model.addAttribute("listTopos",pageListTopos.getContent()); int []
 					pagesListTopos = new int[pageListTopos.getTotalPages()];
@@ -46,7 +49,7 @@ public class TopoController {
 			model.addAttribute("myTopos",pageMyTopos.getContent());
 			int [] pagesMyTopos = new int[pageMyTopos.getTotalPages()];
 			model.addAttribute("pagesMyTopos",pagesMyTopos);
-
+				
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,11 +64,13 @@ public class TopoController {
 		model.addAttribute("place",place);
 		model.addAttribute("description",description);
 
-
-		User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
+		String username = loggedInUser.getName();
+		System.out.println(username);
+		long id = userService.getUser(username).getId();
 
 		try {
-			topoService.saveTopo(userService.getUser(activeUser.getUsername()).getId(),new Topo(new Date(),title,author,place,description));
+			topoService.saveTopo(id,new Topo(new Date(),title,author,place,description));
 		} catch (Exception e) {
 			model.addAttribute("exception",e.getMessage());	
 		}	
