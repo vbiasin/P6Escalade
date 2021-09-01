@@ -9,10 +9,8 @@ layout:decorate="~{template.html}">
 </head>
 <body>
 	<section layout:fragment="content">
-		<h1>BIENVENUE !!!</h1>
-		<section>
-		
-		</section>
+		<div class="jumbotron" sec:authorize="isAuthenticated"><h1>BIENVENUE DANS VOTRE ESPACE PERSO!!!</h1></div>
+
 	</section>
 </body>
 </html>

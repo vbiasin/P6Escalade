@@ -8,8 +8,8 @@ layout:decorate="~{template.html}">
 <title>Login</title>
 </head>
 <body>
-	<section layout:fragment="content">
-		<form th:action="@{/login}" method="post">
+	<section layout:fragment="content" class="jumbotron ”">
+		<form class="text-left text-md-center" th:action="@{/login}" method="post">
 			<div>
 				<label>Mail:</label>
 				<input type="text" name="username"/>

@@ -7,8 +7,8 @@ layout:decorate="~{template.html}">
 <title>Inscription</title>
 </head>
 <body>
-	<section layout:fragment="content">
-		<form th:action="@{/inscription}" method="post">
+	<section layout:fragment="content" class="jumbotron">
+		<form class="text-left text-md-center" th:action="@{/inscription}" method="post">
 			<div>
 				<label>Mail:</label>
 				<input type="text" name="mail"/>
@@ -19,8 +19,6 @@ layout:decorate="~{template.html}">
 			</div>
 			<button type="submit">OK</button>
 		</form>
-		<div th:if="${exception}" th:text="${exception}">
-			</div>
 				
 	</section>
 </body>

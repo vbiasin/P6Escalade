@@ -1,69 +1,92 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-layout:decorate="~{template.html}">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorate="~{template.html}">
 <head>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <title>Site</title>
 </head>
 <body>
-	<section layout:fragment="content">
+	<section layout:fragment="content" class="jumbotron">
 		<h1>SITE D'ESCALADE:</h1>
-		<div sec:authorize="hasAuthority('USER')">
-				<form th:action="@{/commentNew(idSite=${id})}" method="post">
-						<div>
-							<label>Commentaire:</label> 
-							<input type="text" name="comment" />
-						</div>
-						<button type="submit">Publier</button>
-				</form>
-		</div>
-		
-		<div>
-				<table class="table table-striped">
-				<tr>
-					<td th:text= "${id}+' '+${title}+' '+${nbVues}+' '+vues"> </td>
-					<td th:if="${official}==true"><p>Officiel Les amis de l’escalade</p></td>
-				</tr>
-				<tr>
-					<th>Cotation</th><th>Secteurs</th><th>Chemin</th><th>Longueur</th>
-				</tr>
-				<tr>
-					<td th:text= "${cotation}"></td>
-					<td th:text= "${nbSectors}"></td>
-					<td th:text= "${nbPaths}"></td>
-					<td th:text= "${length}"></td>
-				</tr>
-				<tr>
-					<td th:text= "${description}"></td>
-				</tr>	
-			</table>		
-		</div>
-	
-		<div>
-			<table class="table table-striped">
-				<tr>
-					<th>ID</th><th>Date Publication</th><th>Auteur</th><th>Commentaire</th><th>Modifier</th><th>Supprimer</th>
-				</tr>
-				<tr th:each="c:${listComments}">
-					<td th:text= "${c.id}"></td>
-					<td th:text= "${c.publicationDate}"></td>
-					<td th:text= "${c.author.contact.lastName}+' '+${c.author.contact.firstName}"></td>
-					<td th:text= "${c.text}"></td>
-					<td  sec:authorize="hasAuthority('ADMIN')">
-						<form th:action="@{/modifyComment(idSite=${id},idComment=${c.id})}" method="post">
+		<div class="row">
+			<div class="col-12">
+				<div class="card" sec:authorize="hasAuthority('USER')">
+					<div class="card-body">
+						<form th:action="@{/commentNew(idSite=${id})}" method="post">
 							<div>
-							<label>Commentaire modifié:</label> 
-							<input type="text" name="modifyComment" />
-						</div>
-							<button type="submit"  >Modifier</button>
+								<label>Commentaire:</label> <input type="text" name="comment" />
+							</div>
+							<button type="submit">Publier</button>
 						</form>
-					</td>
-				    <td  sec:authorize="hasAuthority('ADMIN')"><form th:action="@{/removeComment(idSite=${id},idComment=${c.id})}" method="post"><button type="submit"  >Supprimer</button></form></td>
-				</tr>
-			</table>
-		</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-striped">
+							<tr>
+								<td th:text="${id}+' '+${title}+' '+${nbViews}+' '+vues"></td>
+								<td th:if="${official}==true"><p>Officiel Les amis de l’escalade</p></td>
+							</tr>
+							<tr>
+	                            <th>Cotation</th><th>Secteurs</th><th>Chemin</th><th>Longueur</th>
+							</tr>
+							<tr>
+								<td th:text="${cotation}"></td>
+								<td th:text="${nbSectors}"></td>
+								<td th:text="${nbPaths}"></td>
+								<td th:text="${length}"></td>
+							</tr>
+							<tr>
+								<td th:text="${description}"></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-striped">
+							<tr>
+								<th>ID</th><th>Date Publication</th><th>Auteur</th><th>Commentaire</th><th>Modifier</th><th>Supprimer</th>
+							</tr>
+							<tr th:each="c:${listComments}">
+								<td th:text="${c.id}"></td>
+								<td th:text="${c.publicationDate}"></td>
+								<td
+									th:text="${c.author.contact.lastName}+' '+${c.author.contact.firstName}"></td>
+								<td th:text="${c.text}"></td>
+								<td sec:authorize="hasAuthority('ADMIN')">
+									<form
+										th:action="@{/modifyComment(idSite=${id},idComment=${c.id})}"
+										method="post">
+										<div>
+											<label>Commentaire modifié:</label> <input type="text"
+												name="modifyComment" />
+										</div>
+										<button type="submit">Modifier</button>
+									</form>
+								</td>
+								<td sec:authorize="hasAuthority('ADMIN')"><form
+										th:action="@{/removeComment(idSite=${id},idComment=${c.id})}"
+										method="post">
+										<button type="submit">Supprimer</button>
+									</form></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</section>
 </body>
 </html>
