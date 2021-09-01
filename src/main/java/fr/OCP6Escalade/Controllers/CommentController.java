@@ -47,6 +47,7 @@ public class CommentController {
 			model.addAttribute("nbSectors",s.getNbSectors());
 			model.addAttribute("nbPaths",s.getNbPaths());
 			model.addAttribute("length",s.getLength());
+			model.addAttribute("official",s.isTag());
 			model.addAttribute("id",idSite);
 	
 			
@@ -82,6 +83,19 @@ public class CommentController {
 		try {
 			User activeUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			commentService.addComment(userService.getUser(activeUser.getUsername()).getId(),idSite,new Comment(new Date(),comment));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/target?idSite="+idSite;
+	}
+	
+	@PostMapping("/modifyComment")
+	public String modifyComment(Model model,String modifyComment,@RequestParam long idSite,@RequestParam long idComment) {
+		model.addAttribute("idSite",idSite);
+		
+		try {
+			commentService.modifyComment(idComment, modifyComment);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

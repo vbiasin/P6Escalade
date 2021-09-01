@@ -41,10 +41,10 @@ public class CommentServiceImpl implements ICommentService {
 	}
 
 	@Override
-	public Comment modifyComment(long idComment, Comment newComment) throws Exception {
+	public Comment modifyComment(long idComment, String changes) throws Exception {
 		Optional<Comment> comment = commentRepository.findById(idComment);
 		if(comment.isEmpty()) throw new Exception("Le commentaire n'existe pas !");
-		comment.get().setText(newComment.getText());
+		comment.get().setText(changes);
 		return commentRepository.saveAndFlush(comment.get());
 	}
 

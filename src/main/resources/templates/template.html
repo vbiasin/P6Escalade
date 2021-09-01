@@ -11,8 +11,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-expand bg-dark navbar-dark" >
-			<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg bg-dark navbar-dark" >
+			<a class="navbar-brand" href="...">LES AMIS DE L'ESCALADE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+      			<span class="navbar-toggler-icon"></span>
+   			</button>
+			<div id="navbarContent" class="collapse navbar-collapse">
 				<ul class="navbar-nav" sec:authorize="!isAuthenticated">
 					<li class="nav-item"><a class="nav-link" th:href="@{/inscription}">S'inscrire</a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{/login}">Se connecter</a></li>
