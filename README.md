@@ -32,3 +32,5 @@ java -jar OCP6Escalade-1.0-SNAPSHOT.war
 Ouvrir l'explorateur de fichiers Choisir un dossier dans lequel cloner le répertoire, clic droit GIT bash here Dans cette console: 
 git clone https://github.com/vbiasin/P6Escalade.git
 Lancer une invite de commandes et saisir mvn package
+  
+  
